@@ -1,0 +1,121 @@
+---
+title: "RExercise#2_Camral"
+author: "Merel Camral"
+date: "2026-09-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "RExercise#2_camral.Rmd"
+author: "Merel Camral"
+date: "2026-09-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Part A Arithmetic Operations
+## 01
+```{r}
+a <- 17
+b <- 5
+a + b 
+a - b
+a * b
+a / b
+```
+
+```{r}
+## 02 Division
+a <- 17
+b <- 5
+a %% b
+a %/% b
+```
+
+```{r}
+## 03 Power
+2 ^ 10
+```
+
+```{r}
+## Question 1:
+17 / 5
+17 %% 5
+17 %/% 5
+## These three results relate to each other mathematically the first perform basic operation of division the second is the remainder and lastly is integer operation.
+```
+
+```{r}
+## Question 2:
+10 %% 3
+## correct
+```
+
+## Part B Basic Types
+```{r}
+##01
+x <- 42
+y <- 42L        # the L suffix forces an integer
+z <- "42"
+w <- TRUE
+v <- 3 + 2i     # complex number
+
+typeof(x)
+typeof(y)
+typeof(z)
+typeof(v)
+```
+
+
+```{r}
+## 02
+x <- 42
+y <- 42L
+z <- "42"
+w <- TRUE
+v <- 3 + 2i 
+
+class(x)
+class(y)
+class(z)
+class(w)
+class(v)
+```
+
+```{r}
+x <- 42
+y <- 42L
+z <- "42"
+w <- TRUE
+v <- 3 + 2i 
+
+mode(x)
+mode(y)
+mode(z)
+mode(w)
+mode(v)
+```
+
+```{r}
+## Question 3:
+x <- 42
+y <- 42L
+
+typeof(x)
+typeof(y)
+
+## typeof(x) the output is double because in R 42 is double while typeof(y) integer because L is Suffix that force integers to storage.
+```
+
+```{r}
+## Question 4:
+# Yes they can produce different outputs because R stores data.
+```
