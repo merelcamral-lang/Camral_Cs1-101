@@ -9,17 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
----
-title: "RExercise#2_camral.Rmd"
-author: "Merel Camral"
-date: "2026-09-30"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 
 ## Part A Arithmetic Operations
 ## 01
@@ -119,3 +108,120 @@ typeof(y)
 ## Question 4:
 # Yes they can produce different outputs because R stores data.
 ```
+
+##Part C - Type Conversion (20 min)
+```{r}
+num_string <- "123"
+num_val <- as.numeric(num_string)
+
+typeof(num_val)
+class(num_val)
+mode(num_val)
+```
+
+```{r}
+as.logical(0)
+as.logical(1)
+# Output: FALSE for 0, TRUE for 1
+```
+
+```{r}
+bad_string <- "hello123"
+as.numeric(bad_string)
+# Output: NA with warning "NAs introduced by coercion"
+```
+
+```{r}
+bad_string <- "hello123"
+as.numeric(bad_string)
+```
+
+```{r}
+##Question 5
+#.1
+#Replacing invalid values with NA keeps data pipelines running smoothly without crashing, while still alerting the user that data coercion occurred.
+
+#.2
+#answer: If you ignore the warnings, NA values will silently propagate throughout your downstream calculations and functions (often resulting in unexpected NA outputs or missing data in plots), leading to corrupted results or incorrect analysis without an explicit error stopping your code.
+```
+
+```{r}
+##Question 6
+#.1
+#answer:Both as.logical(2) and as.logical(-1) will produce TRUE.
+
+#.2
+#answer:R converts 0 to FALSE, while any non-zero number (whether positive or negative) is converted to TRUE.
+
+```
+
+##Part D — Strings, paste(), and paste0()
+```{r}
+first_name <- "Juan"
+last_name <- "Dela Cruz"
+
+# Using print()
+print(first_name)
+print(last_name)
+
+# Using cat()
+cat(first_name, last_name)
+```
+
+```{r}
+full_name_paste <- paste(first_name, last_name)
+full_name_paste0 <- paste0(first_name, last_name)
+
+full_name_paste   # Output: "Juan Dela Cruz"
+full_name_paste0  # Output: "JuanDelaCruz"
+```
+
+```{r}
+paste(first_name, last_name, sep = "-")
+# Output: "Juan-Dela Cruz"
+```
+
+```{r}
+age <- 21
+full_name <- paste(first_name, last_name)
+
+paste0(full_name, " is ", age, " years old.")
+# Output: "Juan Dela Cruz is 21 years old."
+```
+
+```{r}
+##Question 7
+#answer:paste() and paste0() produced different results because paste() automatically inserts a single space (sep = " ") between combined strings by default, whereas paste0() concatenates strings directly with no separator (sep = "").
+```
+
+```{r}
+##Question 8
+#answer: R's paste0() function avoids errors by automatically converting non-character data types into characters through implicit type coercion.
+```
+
+##Part E — Critical Thinking Challenge
+```{r, error = TRUE}
+"5" + 5
+# Result: Error in "5" + 5 : non-numeric argument to binary operator
+```
+
+```{r}
+as.numeric("5") + 5
+# Result: 10
+```
+
+```{r}
+##Question 9
+#answer:R requires explicit conversion in arithmetic to prevent silent logical errors and ambiguous outcomes.
+```
+
+```{r}
+##Question 10
+#answer:The column was imported as characters due to formatting issues, which can be diagnosed with class() and fixed using as.numeric() and data cleaning.
+```
+
+```{r}
+##Conclusion
+#In this lab, I learned that R classifies data into distinct types such as numeric, character, and logical, each governed by strict operational rules. Understanding functions like typeof() and class() is essential for identifying how R stores data and diagnosing operations that fail or produce warnings. Mastering explicit conversion functions like as.numeric() and string tools like paste() ensures data is properly formatted before performing calculations or combining variables, preventing silent coercion errors in downstream analysis.
+```
+
