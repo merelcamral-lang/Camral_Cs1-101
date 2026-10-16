@@ -1,0 +1,239 @@
+---
+title: "RExersises#3"
+author: "Merel Camral"
+date: "2026-10-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Part A Creating Vectors: c(), seq(), rep()
+```{r}
+# Create a numeric vector called scores
+scores <- c(88, 92, 79, 95, 84)
+
+# Create a character vector called subjects
+subjects <- c("Math", "Science", "English", "History", "PE")
+```
+
+```{r}
+# Use seq() to create a vector called odds containing odd numbers from 1 to 19
+odds <- seq(from = 1, to = 19, by = 2)
+
+# Use seq() with length.out to create a vector of exactly 5 evenly spaced numbers between 0 and 1
+evenly_spaced <- seq(from = 0, to = 1, length.out = 5)
+
+```
+
+```{r}
+# Question #1
+#A.
+age <- c(15, 28, 32, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 12, 42, 53, 41, 51, 35, 24, 33, 8)
+length(age) # Answer: 34
+#B.
+1 / age # Answer: 0.06666667 0.03571429 0.03125000 ... 0.12500000
+#C.
+new_age <- c(age, 0, age) 
+
+#D.
+min(age) # Answer: 8
+max(age) # Answer: 57
+```
+
+```{r}
+# Question #2
+# 'each' duplicates every element sequentially before moving to the next item.
+# 'times' duplicates the entire vector sequence as a single continuous block.
+```
+
+
+```{r}
+# Question #3
+# 'by' sets a fixed mathematical distance between numbers. Use it for specific intervals (e.g., calendar steps).
+# 'length.out' sets a fixed final element count. Use it to slice data or build charts with exact dimensions.
+```
+```{r}
+```
+
+```{r}
+# Question #4
+vec_num <- 20:60
+
+mean(vec_num) # Answer: 40
+
+sum(vec_num) # Answer: 1640
+
+length(vec_num) # Answer: 41
+```
+
+## Part B-Subsetting (Accessing) Vectors
+
+```{r}
+grades <- c(88, 92, 79, 95, 84)
+names(grades) <- c("Math", "Science", "English", "History", "PE")
+
+# Access the 3rd element of grades using positional indexing
+grades[3]
+
+# Access the 1st and 4th element of grades using positional indexing
+grades[c(1, 4)]
+
+# Access "Science" and "PE" together using their names
+grades[c("Science", "PE")]
+```
+
+```{r}
+# Return all elements of grades EXCEPT the 1st and 4th, using negative indexing
+grades[-c(1, 4)]
+```
+
+```{r}
+# Use a logical condition to return only the grades that are greater than or equal to 85
+grades[grades >= 85]
+```
+
+
+```{r}
+# Question #5
+# Negative indexing: Used when removing known structural elements, like dropping an ID column or an intercept row.
+# Logical indexing: Used when filtering data based on dynamic thresholds, like selecting rows where sales > 5000.
+
+# Question #6
+grades[10]
+# Answer: Returns NA. R returns NA (Not Available) instead of an error because vectors are dynamically indexable. 
+# It assumes the slot exists conceptually but contains missing data.
+
+# Question #7
+# Code:
+Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
+
+# Output:
+#  [1]  1  2  4  8 11 13 16 17 19 22 23 26 29 31 32 34 37 38 41 43 44 46 47 52 53
+# [26] 58 59 61 62 64 67 68 71 73 74 76 79 82 83 86 88 89 92 94 97
+```
+
+Part C — Vector Operations and append()
+```{r}
+x <- c(1, 2, 3, 4)
+y <- c(10, 20, 30, 40)
+
+# Add x and y element-wise
+x + y
+
+# Multiply every element of x by 2
+x * 2
+```
+
+```{r}
+z <- c(1, 2, 3, 4, 5, 6)
+short <- c(1, 0)
+# Add z and short together
+z + short
+```
+
+```{r}
+fruits <- c("apple", "banana", "cherry")
+# Add "date" to the end of fruits
+fruits <- append(fruits, "date")
+
+# Insert "kiwi" between "apple" and "banana"
+fruits <- append(fruits, "kiwi", after = 1)
+```
+
+```{r}
+#Question 8
+#Answer:R's recycling rule automatically repeated the shorter vector  until it matched the length of the longer vector (z). Since z has 6 elements and short has 2 elements, R repeated c(1, 0) three times to create c(1, 0, 1, 0, 1, 0) behind the scenes, allowing it to perform element-wise addition.
+```
+
+```{r}
+##Question 9
+#.1
+#Answer: Yes, adding z to c(1, 0, 1) works cleanly without any errors or warnings.
+#.2
+#Answer:R recycles silently only if the length of the longer vector is a perfect multiple of the length of the shorter vector. If it is not a perfect multiple, R will still complete the mathematical operation, but it will issue a warning to alert the programmer.
+```
+
+Part D — Lists: Creating and Subsetting
+```{r}
+student <- list(
+  name = "Maria Santos",
+  age = 20,
+  grades = c(88, 92, 79),
+  is_enrolled = TRUE
+)
+```
+
+```{r}
+# Access and check class
+student["grades"]
+class(student["grades"])
+```
+
+```{r}
+# Access and check class
+student[["grades"]]
+class(student[["grades"]])
+
+```
+
+```{r}
+student$name
+```
+
+```{r}
+student$grades[2] 
+# Alternatively: student[["grades"]][2]
+```
+
+```{r}
+#Question 10
+#Using single brackets like student["grades"] returns a list because single brackets always slice out a sub-list while preserving the original structure. Using double brackets like student[["grades"]] extracts the actual contents inside that specific element, returning a numeric vector and stripping away the outer list container.
+```
+
+```{r}
+#Question 11
+#R makes a distinction between single and double brackets for lists because lists can store multiple data types and nested structures, whereas atomic vectors are flat and homogeneous. Single brackets slice out a piece of the list to return a smaller list, while double brackets drill down to unpack the inner contents. An atomic vector contains only a single data type, so it only needs single brackets to retrieve elements from its single, flat layer.
+```
+
+Part E — Critical Thinking Challenge
+```{r}
+inventory <- list(
+  item = c("Notebook", "Pen", "Eraser"),
+  price = c(25.50, 10.00, 5.00),
+  in_stock = c(TRUE, TRUE, FALSE)
+)
+
+inventory$item[inventory$in_stock]
+```
+
+```{r}
+inventory$item <- append(inventory$item, "Ruler")
+inventory$price <- append(inventory$price, 15.00)
+inventory$in_stock <- append(inventory$in_stock, TRUE)
+
+```
+
+```{r}
+#Question 12
+#The expression works because inventory$item and inventory$in_stock are both standard, equal-length vectors residing inside the same list container. When R evaluates inventory$in_stock, it extracts a logical vector of TRUE and FALSE values that aligns positionally with the elements in inventory$item. R then uses that logical vector as a filter, keeping only the items at the matching positions where the logical index evaluates to TRUE.
+```
+
+```{r}
+#Question 13
+#Storing related data as three separate unconnected vectors introduces a severe risk of data misalignment because if any single vector is sorted, filtered, or appended independently, the horizontal relationship across the dataset is completely broken. Bundling these variables into a list or data frame guarantees that all corresponding attributes stay securely paired together as a single observation, making the data pipeline robust against accidental corruption as it grows.
+```
+
+```{r}
+#Conclusion
+#Vectors are flat, homogeneous data structures that require every element to share the exact same data type, whereas lists are flexible, heterogeneous structures that can hold elements of different types and sizes. A programmer should choose a vector when handling simple, uniform sequences of data like numerical coordinates or logical flags for fast arithmetic operations. Conversely, a list should be chosen when a project requires grouping diverse data objects, nested attributes, or mixed variable types together under one organized container.
+```
+
+
+
+
+
+
+
+
